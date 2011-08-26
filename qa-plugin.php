@@ -10,8 +10,7 @@
         Plugin Author URI:                              
         Plugin License: GPLv2                           
         Plugin Minimum Question2Answer Version: 1.3
-*/                      
-                        
+*/        
                         
         if (!defined('QA_VERSION')) { // don't allow this page to be requested directly from browser
                         header('Location: ../../');

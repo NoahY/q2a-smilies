@@ -41,6 +41,7 @@ This is **beta** code.  It is probably okay for production environments, but may
 Release
 -------
 All code herein is Copylefted_.
+Smilies copyright Skype, Inc.
 
 .. _Copylefted: http://en.wikipedia.org/wiki/Copyleft
 

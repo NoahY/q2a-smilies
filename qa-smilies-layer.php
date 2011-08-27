@@ -105,7 +105,64 @@
 			}
 			qa_html_theme_base::doctype();
 		}
+		function head_custom() {
+			if(qa_opt('embed_smileys') && qa_opt('embed_smileys_markdown_button')) {
+				$this->output('<style>',
+				'
+				#wmd-button-bar{
+					width:auto;
+					margin-right:36px;
+					position:relative;
+				}
+				#smiley-button {
+					position:absolute;
+					right:-25px;
+					top:3px;
+					cursor:pointer;
+				}
+				#smiley-box {
+					background: none repeat scroll 0 0 RGBa(255,255,255,0.8);
+					margin-left: 38px;
+					margin-top: 42px;
+					padding: 10px;
+					display: none;
+					position: absolute;
+					z-index: 1000;
+					border:1px solid black;
+				}
+				.smiley-child {
+					margin:4px;
+					cursor:pointer;
+				}
+				'
+				,'</style>');
+				$this->output('<script>',
+				"
+				function toggleSmileyBox() {
+					jQuery('#smiley-box').toggle();
+				}
+				function insertSmiley(code) {
+					jQuery('#wmd-input').val(jQuery('#wmd-input').val()+code);
+					toggleSmileyBox();
+				}
+				"
+				,'</script>');
+			}
+			qa_html_theme_base::head_custom();
+		}
+		function form($form) {
+			if(qa_opt('embed_smileys') && qa_opt('embed_smileys_markdown_button') && $form['hidden']['editor'] == 'Markdown Editor') {
+				$smileybox = '<div id="smiley-box">';
+				foreach($this->smilies as $c => $d) {
+					$url = (qa_opt('embed_smileys_animated')?$d['animated']:$d['static']);
+					$smileybox.='<img title="'.$c.'" class="smiley-child" onclick="insertSmiley(\''.$c.'\');" src="'.QA_HTML_THEME_LAYER_URLTOROOT.$url.'"/>';
+				}
+				$smileybox.='</div>';
 
+				$form['fields']['content'] = preg_replace('/<div id="wmd-button-bar"><\/div>/','<div id="wmd-button-bar"><div id="smiley-button" title="Add emoticon" onclick="toggleSmileyBox()"><img src="'.QA_HTML_THEME_LAYER_URLTOROOT.'images/emoticon-00100-smile.gif"/></div>'.$smileybox.'</div>',$form['fields']['content']);
+			}
+			qa_html_theme_base::form($form);
+		}
 	// theme replacement functions
 
 		function q_view_content($q_view)

@@ -12,6 +12,7 @@ Features
 - 92 smiley types
 - almost all have both animated (gif) and static (png) versions
 - select static or animated version in admin panel
+- optional Markdown editor integration via admin panel
 
 
 ------------

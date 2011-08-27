@@ -25,6 +25,7 @@
             if (qa_clicked('smilies_save')) {
                 qa_opt('embed_smileys',(bool)qa_post_text('embed_smileys'));
                 qa_opt('embed_smileys_animated',(bool)qa_post_text('embed_smileys_animated'));
+                qa_opt('embed_smileys_markdown_button',(bool)qa_post_text('embed_smileys_markdown_button'));
                 $ok = 'Settings Saved.';
             }
   
@@ -43,7 +44,6 @@
                 'value' => qa_opt('embed_smileys'),
                 'type' => 'checkbox',
             );
-            
             $fields[] = array(
                 'label' => 'Use animated smilies where available',
                 'tags' => 'NAME="embed_smileys_animated"',
@@ -51,6 +51,15 @@
                 'type' => 'checkbox',
                 'note' => 'For a complete list of smilies, visit <a href="http://www.skype-emoticons.com/">this page</a>.',
             );
+            
+            $fields[] = array(
+                'label' => 'Add smiley button to markdown editor',
+                'tags' => 'NAME="embed_smileys_markdown_button"',
+                'value' => qa_opt('embed_smileys_markdown_button'),
+                'type' => 'checkbox',
+                'note' => 'Requires markdown editor plugin, available <a href="http://codelair.co.uk/2011/markdown-editor-plugin-q2a/">here</a>.',
+            );
+            
 
             return array(           
                 'ok' => ($ok && !isset($error)) ? $ok : null,

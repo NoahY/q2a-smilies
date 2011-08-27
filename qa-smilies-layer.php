@@ -141,7 +141,7 @@
 				function toggleSmileyBox() {
 					jQuery('#smiley-box').toggle();
 				}
-				function insertSmiley(code) {
+				function insertSmiley(code,img) {
 					jQuery('#wmd-input').val(jQuery('#wmd-input').val()+code);
 					toggleSmileyBox();
 				}
@@ -155,7 +155,7 @@
 				$smileybox = '<div id="smiley-box">';
 				foreach($this->smilies as $c => $d) {
 					$url = (qa_opt('embed_smileys_animated')?$d['animated']:$d['static']);
-					$smileybox.='<img title="'.$c.'" class="smiley-child" onclick="insertSmiley(\''.$c.'\');" src="'.QA_HTML_THEME_LAYER_URLTOROOT.$url.'"/>';
+					$smileybox.='<img title="'.$c.'" class="smiley-child" onclick="insertSmiley(\''.$c.'\',\''.QA_HTML_THEME_LAYER_URLTOROOT.$url.'\');" src="'.QA_HTML_THEME_LAYER_URLTOROOT.$url.'"/>';
 				}
 				$smileybox.='</div>';
 

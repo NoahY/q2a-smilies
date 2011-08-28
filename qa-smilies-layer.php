@@ -151,7 +151,7 @@
 			qa_html_theme_base::head_custom();
 		}
 		function form($form) {
-			if(qa_opt('embed_smileys') && qa_opt('embed_smileys_markdown_button') && $form['hidden']['editor'] == 'Markdown Editor') {
+			if(qa_opt('embed_smileys') && qa_opt('embed_smileys_markdown_button') && @$form['hidden']['editor'] == 'Markdown Editor') {
 				$smileybox = '<div id="smiley-box">';
 				foreach($this->smilies as $c => $d) {
 					$url = (qa_opt('embed_smileys_animated')?$d['animated']:$d['static']);

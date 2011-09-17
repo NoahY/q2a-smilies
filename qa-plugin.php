@@ -4,7 +4,7 @@
         Plugin Name: Smilies
         Plugin URI: https://github.com/NoahY/q2a-smilies
         Plugin Description: Embed Smilies
-        Plugin Version: 0.1
+        Plugin Version: 1.0b
         Plugin Date: 2011-08-24
         Plugin Author: NoahY
         Plugin Author URI:                              

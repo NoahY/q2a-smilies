@@ -189,10 +189,28 @@
 
 		function smiley_replace($text) {
 			
+			// remove tags
+			
+			preg_match_all('/<[^>]+>/', $text, $tags);
+			$idx = 0;
+			while(preg_match('/<[^>]*[^>0-9][^>]*>/',$text) > 0)
+				$text = preg_replace('/<[^>]*[^>0-9][^>]*>/', '<'.($idx++).'>', $text,1);
+
+			// replace smilies
 
 			foreach($this->smilies as $t => $r) {
+				
 				$url = (qa_opt('embed_smileys_animated')?$r['animated']:$r['static']);
 				$text = str_replace($t,'<img src="'.QA_HTML_THEME_LAYER_URLTOROOT.$url.'"/>',$text);
+				
+			}
+			
+			error_log($text);
+			
+			// restore tags
+			
+			foreach($tags[0] as $idx => $tag) {
+				$text = str_replace('<'.$idx.'>',$tag,$text);
 			}
 				
 			return $text;

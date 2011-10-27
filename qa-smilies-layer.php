@@ -205,8 +205,6 @@
 				
 			}
 			
-			error_log($text);
-			
 			// restore tags
 			
 			foreach($tags[0] as $idx => $tag) {

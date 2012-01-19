@@ -3,6 +3,7 @@
 /*              
         Plugin Name: Smilies
         Plugin URI: https://github.com/NoahY/q2a-smilies
+        Plugin Update Check URI: https://github.com/NoahY/q2a-smilies/raw/master/qa-plugin.php
         Plugin Description: Embed Smilies
         Plugin Version: 1.0b
         Plugin Date: 2011-08-24

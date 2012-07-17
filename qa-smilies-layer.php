@@ -33,7 +33,7 @@
 					':)' => array('name'=>'Smile','static'=>'images/emoticon-00100-smile.png','animated'=>'images/emoticon-00100-smile.gif'),
 					':(' => array('name'=>'Sad Smile','static'=>'images/emoticon-00101-sadsmile.png','animated'=>'images/emoticon-00101-sadsmile.gif'),
 					':D' => array('name'=>'Big Smile','static'=>'images/emoticon-00102-bigsmile.png','animated'=>'images/emoticon-00102-bigsmile.gif'),
-					'8)' => array('name'=>'Cool','static'=>'images/emoticon-00103-cool.png','animated'=>'images/emoticon-00103-cool.gif'),
+					'8-)' => array('name'=>'Cool','static'=>'images/emoticon-00103-cool.png','animated'=>'images/emoticon-00103-cool.gif'),
 					':o' => array('name'=>'Wink','static'=>'images/emoticon-00105-wink.png','animated'=>'images/emoticon-00105-wink.gif'),
 					';(' => array('name'=>'Crying','static'=>'images/emoticon-00106-crying.png','animated'=>'images/emoticon-00106-crying.gif'),
 					'(sweat)' => array('name'=>'Sweating','static'=>'images/emoticon-00107-sweating.png','animated'=>'images/emoticon-00107-sweating.gif'),
@@ -109,30 +109,31 @@
 			if(qa_opt('embed_smileys') && qa_opt('embed_smileys_markdown_button')) {
 				$this->output('<style>',
 				'
-				#wmd-button-bar{
-					width:auto;
-					margin-right:36px;
-					position:relative;
+				.wmd-button-bar{
+					min-height:16px;
+					width:auto !important;
+					margin-right:36px !important;
+					position:relative !important;
 				}
 				#smiley-button {
-					position:absolute;
-					right:-25px;
-					top:3px;
-					cursor:pointer;
+					position:absolute !important;
+					right:-25px !important;
+					top:3px !important;
+					cursor:pointer !important;
 				}
 				#smiley-box {
-					background: none repeat scroll 0 0 RGBa(255,255,255,0.8);
-					margin-left: 38px;
-					margin-top: 42px;
-					padding: 10px;
+					background: none repeat scroll 0 0 RGBa(255,255,255,0.8) !important;
+					margin-left: 38px !important;
+					margin-top: 42px !important;
+					padding: 10px !important;
 					display: none;
-					position: absolute;
-					z-index: 1000;
-					border:1px solid black;
+					position: absolute !important;
+					z-index: 1000 !important;
+					border:1px solid black !important;
 				}
 				.smiley-child {
-					margin:4px;
-					cursor:pointer;
+					margin:4px !important;
+					cursor:pointer !important;
 				}
 				'
 				,'</style>');
@@ -142,7 +143,7 @@
 					jQuery('#smiley-box').toggle();
 				}
 				function insertSmiley(code,img) {
-					jQuery('#wmd-input').val(jQuery('#wmd-input').val()+code);
+					jQuery('#wmd-input-content').val(jQuery('#wmd-input-content').val()+code);
 					toggleSmileyBox();
 				}
 				"
@@ -158,8 +159,7 @@
 					$smileybox.='<img title="'.$c.'" class="smiley-child" onclick="insertSmiley(\''.$c.'\',\''.QA_HTML_THEME_LAYER_URLTOROOT.$url.'\');" src="'.QA_HTML_THEME_LAYER_URLTOROOT.$url.'"/>';
 				}
 				$smileybox.='</div>';
-
-				$form['fields']['content'] = preg_replace('/<div id="wmd-button-bar"><\/div>/','<div id="wmd-button-bar"><div id="smiley-button" title="Add emoticon" onclick="toggleSmileyBox()"><img src="'.QA_HTML_THEME_LAYER_URLTOROOT.'images/emoticon-00100-smile.gif"/></div>'.$smileybox.'</div>',$form['fields']['content']);
+				$form['fields']['content']['html'] = str_replace('<div id="wmd-button-bar-content" class="wmd-button-bar"></div>','<div id="wmd-button-bar-content" class="wmd-button-bar"><div id="smiley-button" title="Add emoticon" onclick="toggleSmileyBox()"><img src="'.QA_HTML_THEME_LAYER_URLTOROOT.'images/emoticon-00100-smile.gif"/></div>'.$smileybox.'</div>',$form['fields']['content']['html']);
 			}
 			qa_html_theme_base::form($form);
 		}

@@ -128,7 +128,6 @@
 			qa_html_theme_base::head_custom();
 		}
 		function form($form) {
-			qa_error_log(@$form);
 			if(qa_opt('embed_smileys') && qa_opt('embed_smileys_editor_button') && (@$form['hidden']['editor'] === '' || @$form['hidden']['a_editor'] === '' || @$form['hidden']['q_editor'] === '' || @$form['hidden']['c_editor'] === '')) {
 				@$form['fields']['content']['tags'] .= ' index="'.$this->idx.'"';
 				$smileybox = $this->makeSmileyBox();

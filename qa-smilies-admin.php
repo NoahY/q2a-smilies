@@ -4,9 +4,42 @@
 	function option_default($option) {
 		
 	    switch($option) {
-		default:
-		    return null;				
-	    }
+			case 'embed_smileys_css':
+				return '
+				.smiley-button {
+					cursor:pointer !important;
+				}
+				.smiley-box {
+					background: none repeat scroll 0 0 RGBa(255,255,255,0.8) !important;
+					padding: 10px !important;
+					display: none;
+					border:1px solid black !important;
+				}
+				.wmd-button-bar{
+					min-height:16px;
+					width:auto !important;
+					margin-right:36px !important;
+					position:relative !important;
+				}
+				.wmd-button-bar .smiley-button {
+					position:absolute !important;
+					right:-25px !important;
+					top:3px !important;
+				}
+				.wmd-button-bar .smiley-box {
+					margin-left: 38px !important;
+					margin-top: 42px !important;
+					z-index: 1000 !important;
+					position: absolute !important;
+				}
+				.smiley-child {
+					margin:4px !important;
+					cursor:pointer !important;
+				}
+				';
+			default:
+				return null;				
+		}
 		
 	}
         
@@ -25,7 +58,9 @@
             if (qa_clicked('smilies_save')) {
                 qa_opt('embed_smileys',(bool)qa_post_text('embed_smileys'));
                 qa_opt('embed_smileys_animated',(bool)qa_post_text('embed_smileys_animated'));
+                qa_opt('embed_smileys_editor_button',(bool)qa_post_text('embed_smileys_editor_button'));
                 qa_opt('embed_smileys_markdown_button',(bool)qa_post_text('embed_smileys_markdown_button'));
+                qa_opt('embed_smileys_css',qa_post_text('embed_smileys_css'));
                 $ok = 'Settings Saved.';
             }
   
@@ -53,11 +88,33 @@
             );
             
             $fields[] = array(
+                'label' => 'Add smiley button to ordinary editor',
+                'tags' => 'NAME="embed_smileys_editor_button"',
+                'value' => qa_opt('embed_smileys_editor_button'),
+                'type' => 'checkbox',
+            );
+            
+            
+            $fields[] = array(
                 'label' => 'Add smiley button to markdown editor',
                 'tags' => 'NAME="embed_smileys_markdown_button"',
                 'value' => qa_opt('embed_smileys_markdown_button'),
                 'type' => 'checkbox',
                 'note' => 'Requires markdown editor plugin, available <a href="http://codelair.co.uk/2011/markdown-editor-plugin-q2a/">here</a>.',
+            );
+            
+            
+            $fields[] = array(
+                'type' => 'blank',
+            );
+            
+            
+            $fields[] = array(
+                'label' => 'Smiley CSS',
+                'tags' => 'NAME="embed_smileys_css"',
+                'value' => qa_opt('embed_smileys_css'),
+                'type' => 'textarea',
+                'rows' => '20'
             );
             
 

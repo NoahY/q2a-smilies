@@ -10,10 +10,14 @@
 					cursor:pointer !important;
 				}
 				.smiley-box {
-					background: none repeat scroll 0 0 RGBa(255,255,255,0.8) !important;
+					background: none repeat scroll 0 0 rgba(255, 255, 255, 0.8) !important;
+					border: 1px solid black !important;
 					padding: 10px !important;
 					display: none;
-					border:1px solid black !important;
+					width: 378px;
+					margin: 7px 0 0 20px;
+					z-index: 1000 !important;
+					position: absolute !important;
 				}
 				.wmd-button-bar{
 					min-height:16px;
@@ -26,11 +30,8 @@
 					right:-25px !important;
 					top:3px !important;
 				}
-				.wmd-button-bar .smiley-box {
-					margin-left: 38px !important;
-					margin-top: 42px !important;
-					z-index: 1000 !important;
-					position: absolute !important;
+				.wmd-button-bar	.smiley-box {
+					margin: 24px 0 0 169px !important;
 				}
 				.smiley-child {
 					margin:4px !important;

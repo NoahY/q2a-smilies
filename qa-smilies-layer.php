@@ -128,32 +128,33 @@
 			qa_html_theme_base::head_custom();
 		}
 		function form($form) {
-			if(qa_opt('embed_smileys') && qa_opt('embed_smileys_editor_button') && (@$form['hidden']['editor'] === '' || @$form['hidden']['a_editor'] === '' || @$form['hidden']['q_editor'] === '' || @$form['hidden']['c_editor'] === '')) {
-				@$form['fields']['content']['tags'] .= ' index="'.$this->idx.'"';
-				$smileybox = $this->makeSmileyBox();
-				$form['fields'] = array_merge(
-					array(
-						'smileys' => array(
-							"type" => "custom",
-							"html" => '<div class="smiley-button" id="smiley-button'.$this->idx.'" title="Add emoticon" onclick="toggleSmileyBox('.$this->idx.')"><img src="'.QA_HTML_THEME_LAYER_URLTOROOT.'images/emoticon-00100-smile.gif"/></div>'.$smileybox,
-						)
-					),
-					$form['fields']
-				);
-				$this->idx++;
-			}
-			else if(qa_opt('embed_smileys') && qa_opt('embed_smileys_markdown_button')) {
-				if(@$form['hidden']) {
-					foreach($form['hidden'] as $val) {
-						if($val == "Markdown Editor") {
-							@$form['fields']['content']['tags'] .= ' index="'.$this->idx.'"';
-							$smileybox = $this->makeSmileyBox();
-							$form['fields']['content']['html'] = str_replace('class="wmd-button-bar"></div>','class="wmd-button-bar"><div class="smiley-button" id="smiley-button'.$this->idx.'" title="Add emoticon" onclick="toggleSmileyBox('.$this->idx.')"><img src="'.QA_HTML_THEME_LAYER_URLTOROOT.'images/emoticon-00100-smile.gif"/></div>'.$smileybox.'</div>',$form['fields']['content']['html']);
-							$form['fields']['content']['html'] = str_replace('<textarea','<textarea index="'.$this->idx.'"',$form['fields']['content']['html']);
-							$this->idx++;
-							break;
-						}
-					}
+			if(qa_opt('embed_smileys') && isset($form['hidden']) && isset($form['id'])) {
+				$id = substr($form['id'],0,1);
+				if($id == 'c')
+					$id = $form['id'];
+				$editor = @$form['hidden'][$id.'_editor'];
+				if($editor === null)
+					return qa_html_theme_base::form($form);
+				if($editor == "" && qa_opt('embed_smileys_editor_button')) {
+					@$form['fields']['content']['tags'] .= ' index="'.$this->idx.'"';
+					$smileybox = $this->makeSmileyBox();
+					$form['fields'] = array_merge(
+						array(
+							'smileys' => array(
+								"type" => "custom",
+								"html" => '<div class="smiley-button" id="smiley-button'.$this->idx.'" title="Add emoticon" onclick="toggleSmileyBox('.$this->idx.')"><img src="'.QA_HTML_THEME_LAYER_URLTOROOT.'images/emoticon-00100-smile.gif"/></div>'.$smileybox,
+							)
+						),
+						$form['fields']
+					);
+					$this->idx++;
+				}
+				else if($editor == "Markdown Editor" && qa_opt('embed_smileys_markdown_button')) {
+					@$form['fields']['content']['tags'] .= ' index="'.$this->idx.'"';
+					$smileybox = $this->makeSmileyBox();
+					$form['fields']['content']['html'] = str_replace('class="wmd-button-bar"></div>','class="wmd-button-bar"><div class="smiley-button" id="smiley-button'.$this->idx.'" title="Add emoticon" onclick="toggleSmileyBox('.$this->idx.')"><img src="'.QA_HTML_THEME_LAYER_URLTOROOT.'images/emoticon-00100-smile.gif"/></div>'.$smileybox.'</div>',$form['fields']['content']['html']);
+					$form['fields']['content']['html'] = str_replace('<textarea','<textarea index="'.$this->idx.'"',$form['fields']['content']['html']);
+					$this->idx++;
 				}
 			}
 			qa_html_theme_base::form($form);

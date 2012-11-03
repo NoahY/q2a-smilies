@@ -5,7 +5,7 @@
         Plugin URI: https://github.com/NoahY/q2a-smilies
         Plugin Update Check URI: https://github.com/NoahY/q2a-smilies/raw/master/qa-plugin.php
         Plugin Description: Embed Smilies
-        Plugin Version: 1.3
+        Plugin Version: 1.4
         Plugin Date: 2011-08-24
         Plugin Author: NoahY
         Plugin Author URI:                              
